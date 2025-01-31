@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+</head>
+<body>
+    <%- include('partials/header.ejs') %>
+
+    <h1>Create New Category</h1>
+    <p>Vous êtes connecté à la zone membre.</p>
+
+    <form action="/api/account/logout" method="POST">
+        <button type="submit">Se déconnecter</button>
+    </form>
+
+    <h2>Add a category</h2>
+    <form action="/shop/admin/add/category" method="POST">
+        <label for="category_name">category :</label>
+        <input type="text" name="category_name" id="category_name" required>
+
+        <button type="submit">Créer la catégorie</button>
+    </form>
+
+    <a href="/shop">Shop</a>
+
+    <%- include('partials/footer') %>
+</body>
+</html>

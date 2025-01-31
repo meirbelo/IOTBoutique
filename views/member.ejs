@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Membre</title>
+</head>
+<body>
+    <%- include('partials/header.ejs') %>
+
+    <h1>Welcome <%= user.login %>!</h1>
+    <p>Vous êtes connecté à la zone membre.</p>
+    
+    <!-- Formulaire de déconnexion -->
+    <form action="/api/account/logout" method="POST">
+        <button type="submit">Se déconnecter</button>
+    </form>
+    
+    <a href="/shop">Shop</a>
+    
+    <%- include('partials/footer') %>
+</body>
+</html>

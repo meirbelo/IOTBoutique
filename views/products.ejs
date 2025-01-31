@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <%- include('partials/header.ejs') %>
+
+    <h1>All Products Coming Soon!</h1>
+    <p>Vous êtes connecté à la zone membre.</p>
+
+    <!-- Formulaire de déconnexion -->
+    <form action="/api/account/logout" method="POST">
+        <button type="submit">Se déconnecter</button>
+    </form>
+
+    <!-- Affichage de tous les produits -->
+    <h2>Nos produits</h2>
+    <div>
+        <% if (products.length === 0) { %>
+            <p>Aucun produit disponible pour le moment.</p>
+        <% } else { %>
+            <ul>
+                <% products.forEach(product => { %>
+                    <li>
+                        <h3><a href="/shop/<%= product.productId %>"><%= product.title %></a></h3>
+                        <p>Prix: <%= product.price %>€</p>
+                        <p>Catégorie: <%= product.category_id ? product.category_id.category_name : 'Non définie' %></p>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } %>
+    </div>
+
+    <a href="/shop">Retour à la boutique</a>
+
+    <%- include('partials/footer') %>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+    <%- include('partials/header.ejs') %>
+
+<div class="container">
+    <h2>Login</h2>
+    <form action="/api/account/login" method="POST">
+        <div class="form-group">
+            <label for="login">Login</label>
+            <input type="text" id="login" name="login" placeholder="Enter your login" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+
+        <button type="submit" class="btn-submit">Login</button>
+    </form>
+
+    <div class="footer-text">
+        <p>Don't have an account? <a href="/api/account/register">Register here</a></p>
+    </div>
+</div>
+<%- include('partials/footer') %>
+
+</body>
+</html>
