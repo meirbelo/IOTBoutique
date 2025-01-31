@@ -1,8 +1,0 @@
-{
-  "databse host": "127.0.0.1",
-  "databse port": 4242,
-  "database": {
-    "host": "127.0.0.1",
-    "port": 4242
-  }
-}
