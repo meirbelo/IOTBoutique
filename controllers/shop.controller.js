@@ -38,6 +38,7 @@ exports.CreateProduct = async (req, res) => {
             description: req.body.description,
             category_id: req.body.category_id
         });
+
         await newProduct.save();
         res.status(200).redirect('/shop');
     } catch (err) {
@@ -50,6 +51,7 @@ exports.CreateCategoryForm = async (req, res) => {
 };
 
 exports.CreateCategory = async (req, res) => {
+
     const { error } = validateCategory(req.body);
     if (error) {
         return res.status(400).json({ error: error.details[0].message });
@@ -57,12 +59,11 @@ exports.CreateCategory = async (req, res) => {
     const newCategory = new Category({
         category_name: req.body.category_name
     });
-
     try {
         await newCategory.save();
         res.status(200).redirect('/shop/admin/add/product');
     } catch (err) {
-        console.error("Erreur MongoDB :", err);
+        console.error("Erreur MongoDB :", err); // Debugging
         res.status(500).json({ error: 'Erreur serveur', message: err.message });
     }
 };
