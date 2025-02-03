@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Page</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
 </head>
 <body>
     <%- include('partials/header.ejs') %>
@@ -20,19 +19,27 @@
 
     <!-- Affichage de tous les produits -->
     <h2>Nos produits</h2>
-    <div>
+    <div class="container">
         <% if (products.length === 0) { %>
             <p>Aucun produit disponible pour le moment.</p>
         <% } else { %>
-            <ul>
-                <% products.forEach(product => { %>
-                    <li>
-                        <h3><a href="/shop/<%= product.productId %>"><%= product.title %></a></h3>
-                        <p>Prix: <%= product.price %>€</p>
-                        <p>Catégorie: <%= product.category_id ? product.category_id.category_name : 'Non définie' %></p>
-                    </li>
+            <div class="row">
+                <% products.forEach((product, index) => { %>
+                    <% if (index % 4 === 0 && index !== 0) { %>
+                        </div><div class="row"> <!-- Nouvelle ligne après chaque 4 produits -->
+                    <% } %>
+                    <div class="col-md-3 mb-4">
+                        <div class="card">
+                            <!-- <img src='default-image.jpg' class="card-img-top"> -->
+                            <div class="card-body">
+                                <h5 class="card-title"><a href="/shop/<%= product.productId %>"><%= product.title %></a></h5>
+                                <p class="card-text">Prix: <%= product.price %>€</p>
+                                <p class="card-text">Catégorie: <%= product.category_id ? product.category_id.category_name : 'Non définie' %></p>
+                            </div>
+                        </div>
+                    </div>
                 <% }); %>
-            </ul>
+            </div>
         <% } %>
     </div>
 
