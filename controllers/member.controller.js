@@ -1,3 +1,3 @@
-exports.MemberPage = (req, res) => {
+exports.renderMemberPage = (req, res) => {
     res.render("member",  {user : req.user });
 };

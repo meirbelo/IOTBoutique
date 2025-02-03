@@ -1,4 +1,4 @@
-const { User, validateUserSignUp, validateUserSignIn } = require('../models/user.model');
+const { User, validateUserSignUp, validateUserSignIn } = require('../models/account.model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const SECRET = process.env.SECRET
@@ -12,11 +12,11 @@ const generateToken = (user) => {
     );
 };
 
-exports.renderSignUpPage = (req, res) => {
+exports.renderRegisterPage = (req, res) => {
     res.render('register');
 };
 
-exports.renderSignInPage = (req, res) => {
+exports.renderLoginPage = (req, res) => {
     res.render('login');
 };
 
@@ -97,7 +97,7 @@ exports.loginUser = async (req, res) => {
 exports.logoutUser = async (req, res) => {
     try {
         res.clearCookie("token");
-        res.status(200).redirect('/api/account/login');
+        res.status(200).redirect('/account/login');
     } catch (err) {
         res.status(400).send('Error during logout: ' + err.message);
     }

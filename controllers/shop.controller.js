@@ -1,13 +1,19 @@
 const { Product, validateProduct } = require('../models/product.model');
 const { Category, validateCategory } = require('../models/category.model');
 
-exports.GetAllProduct =async (req, res) => {
-    // Jointure avec la collection Categories
-    let products = await Product.find().populate("category_id", "category_name"); 
-    res.render("products", { products });;
+exports.getProducts =async (req, res) => {
+    try {
+        // Join with Categories collection 
+        let products = await Product.find().populate("category_id", "category_name");
+        res.render("products", { products });
+    } catch (error) {
+        console.error("Erreur lors de la récupération des produits :", error);
+        res.status(500).send("Erreur serveur");
+    }
+    
 }
 
-exports.GetIdProduct = async (req, res) => {
+exports.getIdProduct = async (req, res) => {
     try {
         let id = req.params.id;
         let product = await Product.findOne({ productId: id }).populate("category_id", "category_name");
@@ -21,9 +27,23 @@ exports.GetIdProduct = async (req, res) => {
     }
 };
 
-exports.CreateProductForm = async (req, res) => {
+exports.ManageProducts = async (req, res) => {
+    try {
+        const categories = await Category.find({});
+        const products = await Product.find().populate("category_id", "category_name");
+    
+        res.render("adminProduct", { categories, products });
+        
+    } catch (error) {
+        console.error("Erreur lors de la récupération des produits et catégories :", error);
+        res.status(500).send("Erreur serveur");
+    }
+};
+
+
+exports.AddProductForm = async (req, res) => {
     const categories = await Category.find({})
-    res.render("createProduct", {categories});
+    res.render("addProducts", {categories});
 };
 
 exports.CreateProduct = async (req, res) => {
@@ -40,9 +60,44 @@ exports.CreateProduct = async (req, res) => {
         });
 
         await newProduct.save();
-        res.status(200).redirect('/shop');
+        res.status(200).redirect('/shop/admin/products');
     } catch (err) {
         res.status(500).json({ error: 'Erreur serveur', message: err.message });
+    }
+};
+
+exports.UpdateProduct = async (req, res) => {
+    try {
+        const findProductandUpdate = await Product.findByIdAndUpdate(
+        req.params.id,
+            req.body,     
+            { new: true, runValidators: true }
+        );
+        if (!findProductandUpdate) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+        res.status(303).redirect('/shop/admin/products');
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ message: "Erreur serveur", error: error.message });
+    }
+};
+
+exports.DeleteProduct = async (req, res) => {
+    try {
+        const findProductandDelete = await Product.findByIdAndDelete(
+            req.params.id,
+            req.body,     
+            { new: true, runValidators: true }
+        );
+
+        if (!findProductandDelete) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+        res.status(303).redirect('/shop/admin/products');
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ message: "Erreur serveur", error: error.message });
     }
 };
 
@@ -61,9 +116,9 @@ exports.CreateCategory = async (req, res) => {
     });
     try {
         await newCategory.save();
-        res.status(200).redirect('/shop/admin/add/product');
+        res.status(200).redirect('/shop/admin/category');
     } catch (err) {
-        console.error("Erreur MongoDB :", err); // Debugging
+        console.error("Erreur MongoDB :", err);
         res.status(500).json({ error: 'Erreur serveur', message: err.message });
     }
 };
