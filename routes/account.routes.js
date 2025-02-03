@@ -3,12 +3,15 @@ module.exports = app => {
   var router = require("express").Router();
 
   
-    router.get("/register", account.renderSignUpPage);
-    router.get("/login", account.renderSignInPage);
+    router.get("/register", account.renderRegisterPage);
     router.post("/register", account.registerUser);
+
+    
+    router.get("/login", account.renderLoginPage);
     router.post("/login", account.loginUser);
+
     router.post("/logout", account.logoutUser);
 
    
-    app.use("/api/account", router);
+    app.use("/account", router);
   };

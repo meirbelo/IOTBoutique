@@ -3,12 +3,24 @@ module.exports = app => {
     const {authenticateToken , isAdmin}  = require("../middleware/auth.middleware.js")
 
     var router = require("express").Router();
-    router.get("/",  authenticateToken, shop.GetAllProduct);
-    router.get("/:id",  authenticateToken, shop.GetIdProduct);
-    router.get("/admin/add/product",  authenticateToken, isAdmin, shop.CreateProductForm);
-    router.post("/admin/add/product",  authenticateToken, isAdmin, shop.CreateProduct);
-    router.get("/admin/add/category",  authenticateToken, isAdmin, shop.CreateCategoryForm);
-    router.post("/admin/add/category",  authenticateToken, isAdmin, shop.CreateCategory);
+
+    //routes for user 
+    router.get("/",  authenticateToken, shop.getProducts);
+    router.get("/:id",  authenticateToken, shop.getIdProduct);
+
+
+    //routes for admin
+    router.get("/admin/products",  authenticateToken, isAdmin, shop.ManageProducts);
+    router.post("/admin/product/new",  authenticateToken, isAdmin, shop.CreateProduct);
+    router.get("/admin/product/new",  authenticateToken, isAdmin, shop.AddProductForm);
+
+    router.post("/admin/product/edit/:id",  authenticateToken, isAdmin, shop.UpdateProduct);
+
+    
+    router.post("/admin/product/delete/:id",  authenticateToken, isAdmin, shop.DeleteProduct);
+
+    router.get("/admin/category/new",  authenticateToken, isAdmin, shop.CreateCategoryForm);
+    router.post("/admin/category/new",  authenticateToken, isAdmin, shop.CreateCategory);
     
     app.use("/shop", router);
     };
