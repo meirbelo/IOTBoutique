@@ -1,57 +1,30 @@
 const mongoose = require('mongoose');
-const Joi = require('joi');
 
+// controllers/users.controller.js
+
+// Import necessary modules
+// Define the user schema
 const userSchema = new mongoose.Schema({
-    login: {
+    name: {
         type: String,
-        required: true,
-        min: 5,
-        max: 20,
-        unique: true,
+        required: true
     },
     email: {
         type: String,
         required: true,
-        min: 5,
-        max: 30,
-        unique: true,
+        unique: true
     },
     password: {
         type: String,
-        required: true,
-        min: 7,
-        max: 30,
+        required: true
     },
-    admin: {
-        type: Boolean,
-        default: false,
-    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 });
 
-// Validation pour l'inscription
-function validateUserSignUp(user) {
-    const schema = Joi.object({
-        login: Joi.string().min(5).max(20).required(),
-        email: Joi.string().min(5).max(30).required(),
-        password: Joi.string().min(7).max(30).required(),
-        passwordConfirm: Joi.string().valid(Joi.ref('password')).required().messages({ 'any.only': 'Passwords do not match' }),
-    });
-    return schema.validate(user);
-}
+// Create the user model
+const User = mongoose.model('User', userSchema);
 
-// Validation pour la connexion
-function validateUserSignIn(user) {
-    const schema = Joi.object({
-        login: Joi.string().min(5).max(20).required(),
-        password: Joi.string().min(7).max(30).required(),
-    });
-    return schema.validate(user);
-}
-
-const User = mongoose.model('accounts', userSchema);
-
-module.exports = {
-    User,
-    validateUserSignUp,
-    validateUserSignIn,
-};
+module.exports = User;

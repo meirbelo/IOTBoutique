@@ -13,6 +13,7 @@
     "mongodb": "^6.12.0",
     "mongoose": "^8.9.5",
     "mongoose-sequence": "^6.0.1",
-    "nconf": "^0.12.1"
+    "nconf": "^0.12.1",
+    "uuid": "^11.0.5"
   }
 }

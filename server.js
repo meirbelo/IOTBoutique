@@ -22,6 +22,8 @@ const environment = nconf.get("environment")
 require("./routes/account.routes")(app);
 require("./routes/member.routes")(app);
 require("./routes/shop.routes")(app);
+require("./routes/users.routes")(app);
+
 
    mongoose.connect(process.env.DATABASE_URL)
    .then(() => console.log('Connected to Database'))
