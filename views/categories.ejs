@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des catégories</title>
+</head>
+<bodyc class="d-flex flex-column min-vh-100">
+    <%- include('partials/header.ejs') %>
+
+    <div class="container mt-4 flex-grow-1">
+        <h1 class="text-center">Liste des Catégories</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Nom de la catégorie</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% categories.forEach(function(category) { %>
+                    <tr>
+                        <td><%= category.category_name %></td>
+                        <td>
+                            <button class="btn btn-warning btn-sm edit-btn" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#editModal"
+                            data-id="<%= category._id %>" 
+                            data-category_name="<%= category.category_name %>">
+                        ✏️ Modifier
+                    </button>
+                            <form action="/shop/admin/category/delete/<%= category._id %>" method="POST" class="d-inline">
+                                <button type="submit" class="btn btn-danger btn-sm">🗑️ Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Modifier la Catégorie</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editcategoryForm" method="POST">
+                        <input type="hidden" id="categoryId" name="_id">
+
+                        <div class="mb-3">
+                            <label for="Title" class="form-label">Nom de la Categorie</label>
+                            <input type="text" class="form-control" id="category_name" name="category_name" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sauvegarder les modifications</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <%- include('partials/footer.ejs') %>
+    </div>
+    <script src="/js/categories.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

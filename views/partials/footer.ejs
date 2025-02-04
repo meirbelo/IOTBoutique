@@ -1,9 +1,42 @@
-<footer>
-    <p>&copy; <%= new Date().getFullYear() %> Nom de votre entreprise. Tous droits réservés.</p>
-    <ul>
-      <li><a href="/mentions-legales">Mentions légales</a></li>
-      <li><a href="/politique-de-confidentialite">Politique de confidentialité</a></li>
-      <li><a href="/contact">Contactez-nous</a></li>
-    </ul>
-  </footer>
-  
+<!-- footer.ejs -->
+<footer class="bg-light text-center text-lg-start mt-auto">
+  <div class="container p-4">
+      <div class="row">
+          <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+              <h5 class="text-uppercase">IOTBoutique</h5>
+              <p>&copy; <%= new Date().getFullYear() %> IOTBoutique. Tous droits réservés.</p>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+              <h5 class="text-uppercase">Liens utiles</h5>
+              <ul class="list-unstyled mb-0">
+                  <li>
+                      <a href="/mentions-legales" class="text-dark">Mentions légales</a>
+                  </li>
+                  <li>
+                      <a href="/politique-de-confidentialite" class="text-dark">Politique de confidentialité</a>
+                  </li>
+                  <li>
+                      <a href="/contact" class="text-dark">Contactez-nous</a>
+                  </li>
+              </ul>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+              <h5 class="text-uppercase">Suivez-nous</h5>
+              <ul class="list-unstyled mb-0">
+                  <li>
+                      <a href="https://www.facebook.com/IOTBoutique" class="text-dark">Facebook</a>
+                  </li>
+                  <li>
+                      <a href="https://www.twitter.com/IOTBoutique" class="text-dark">Twitter</a>
+                  </li>
+                  <li>
+                      <a href="https://www.instagram.com/IOTBoutique" class="text-dark">Instagram</a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </div>
+  <div class="text-center p-3 bg-light">
+      <a class="text-dark" href="https://www.iotboutique.com">www.iotboutique.com</a>
+  </div>
+</footer>
