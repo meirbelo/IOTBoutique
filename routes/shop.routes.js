@@ -10,17 +10,20 @@ module.exports = app => {
 
 
     //routes for admin
-    router.get("/admin/products",  authenticateToken, isAdmin, shop.ManageProducts);
-    router.post("/admin/product/new",  authenticateToken, isAdmin, shop.CreateProduct);
-    router.get("/admin/product/new",  authenticateToken, isAdmin, shop.AddProductForm);
+    router.get("/admin/products", isAdmin, shop.ManageProducts);
+    router.post("/admin/product/new", isAdmin, shop.CreateProduct);
+    router.get("/admin/product/new", isAdmin, shop.AddProductForm);
 
-    router.post("/admin/product/edit/:id",  authenticateToken, isAdmin, shop.UpdateProduct);
+    router.post("/admin/product/edit/:id", isAdmin, shop.UpdateProduct);
 
     
-    router.post("/admin/product/delete/:id",  authenticateToken, isAdmin, shop.DeleteProduct);
+    router.post("/admin/product/delete/:id", isAdmin, shop.DeleteProduct);
 
-    router.get("/admin/category/new",  authenticateToken, isAdmin, shop.CreateCategoryForm);
-    router.post("/admin/category/new",  authenticateToken, isAdmin, shop.CreateCategory);
     
+    router.get("/admin/categories", isAdmin, shop.ManageCategories);
+    router.post("/admin/category/new",  isAdmin, shop.CreateCategory);
+    router.get("/admin/category/new",  isAdmin, shop.CreateCategoryForm);
+    router.post("/admin/category/edit/:id", isAdmin, shop.UpdateCategory);
+    router.post("/admin/category/delete/:id", isAdmin, shop.DeleteCategory);
     app.use("/shop", router);
     };
