@@ -3,9 +3,12 @@ module.exports = app => {
  const {authenticateToken, isAdmin} = require('../middleware/auth.middleware.js')
  const router = require("express").Router();
 
- router.get('/' , isAdmin , users.getUsers)
- router.post('/edit/:id' , isAdmin , users.updateUsers)
- router.post('/delete/:id' , isAdmin , users.deleteUsers)
+ router.use(authenticateToken);
+
+ // Routes spécifiques à l'administrateur
+ router.get('/', isAdmin, users.getUsers);
+ router.post('/edit/:id', isAdmin, users.updateUsers);
+ router.post('/delete/:id', isAdmin, users.deleteUsers);
 
  app.use('/admin/users',  router);
 }

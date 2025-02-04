@@ -68,7 +68,7 @@
 
                         <div class="mb-3">
                             <label for="categorie" class="form-label">Catégorie</label>
-                            <select class="form-select" id="category" name="category" required>
+                            <select class="form-select" id="category" name="category_id" required>
                                 <option value="">Sélectionner une catégorie</option>
                                 <% categories.forEach(function(category) { %>
                                     <option value="<%= category._id %>"><%= category.category_name %></option>

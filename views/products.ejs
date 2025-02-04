@@ -6,18 +6,11 @@
     <title>Product Page</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <%- include('partials/header.ejs') %>
+    <div class="container mt-4 flex-grow-1">
+    <h1 class="text-center">Boutique</h1>
 
-    <h1>All Products Coming Soon!</h1>
-    <p>Vous êtes connecté à la zone membre.</p>
-
-    <!-- Formulaire de déconnexion -->
-    <form action="/api/account/logout" method="POST">
-        <button type="submit">Se déconnecter</button>
-    </form>
-
-    <!-- Affichage de tous les produits -->
     <h2>Nos produits</h2>
     <div class="container">
         <% if (products.length === 0) { %>
@@ -42,9 +35,10 @@
             </div>
         <% } %>
     </div>
+</div>
 
-    <a href="/shop">Retour à la boutique</a>
-
-    <%- include('partials/footer') %>
+<div class="mt-5">
+    <%- include('partials/footer.ejs') %>
+</div>
 </body>
 </html>

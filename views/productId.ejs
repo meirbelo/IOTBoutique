@@ -5,21 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= product.title %> - Détail du produit</title>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <%- include('partials/header.ejs') %>
-
+    <div class="container mt-4 flex-grow-1">
     <h1>Details du produit</h1>
 
     <div class="product-detail">
-        <h2>Title: <%= product.title %></h2>
+        <h2>Titre: <%= product.title %></h2>
         <p><strong>Prix : </strong><%= product.price %> €</p>
         <p><strong>Description : </strong><%= product.description %></p>
         <p>Catégorie : <%= product.category_id.category_name %></p> <!-- Affichage de category_name -->
 
     </div>
 
-    <a href="/shop">Retour à la boutique</a>
+    <a href="/shop" class="btn btn-primary">Retour à la boutique</a>
 
-    <%- include('partials/footer.ejs') %>
+    </div>
+    <div class="mt-5">
+        <%- include('partials/footer.ejs') %>
+    </div>
 </body>
 </html>

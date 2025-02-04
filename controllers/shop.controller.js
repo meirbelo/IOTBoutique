@@ -122,10 +122,12 @@ exports.CreateCategory = async (req, res) => {
         res.status(500).json({ error: 'Erreur serveur', message: err.message });
     }
 };
+
 exports.ManageCategories = async (req, res) => {
     const categories = await Category.find({})
     res.render("categories", {categories});
 };
+
 exports.UpdateCategory = async (req, res) => {
     try {
         const findCategoryandUpdate = await Category.findByIdAndUpdate(
@@ -142,13 +144,19 @@ exports.UpdateCategory = async (req, res) => {
         res.status(400).json({ message: "Erreur serveur", error: error.message });
     }
 };
+
 exports.DeleteCategory = async (req, res) => {
     try {
-        // Récupérer la catégorie "Aucune catégorie"
-        const noCategory = await Category.findOne({ category_name: "Aucune catégorie" });
-        
+        // Récupérer ou créer la catégorie "Aucune catégorie"
+        let noCategory = await Category.findOne({ category_name: "Aucune catégorie" });
+
         if (!noCategory) {
-            return res.status(404).json({ message: "Aucune catégorie n'existe." });
+            // Si la catégorie "Aucune catégorie" n'existe pas, on la crée
+            noCategory = new Category({
+                category_name: "Aucune catégorie",
+                categoryId: 0 // ou une autre valeur si nécessaire
+            });
+            await noCategory.save();
         }
 
         // Mettre à jour les produits associés à la catégorie à supprimer
@@ -170,6 +178,7 @@ exports.DeleteCategory = async (req, res) => {
         res.status(400).json({ message: "Erreur serveur", error: error.message });
     }
 };
+
 
 
 

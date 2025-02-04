@@ -13,7 +13,9 @@ const authenticateToken = async (req, res, next) => {
         // Vérifie si le accessToken est valide
         const decoded = jwt.verify(token, SECRET);
         req.user = decoded;
-        return next();
+            return next();
+
+        
     } catch (err) {
         return res.status(500).json({ message: "Erreur" });
     }

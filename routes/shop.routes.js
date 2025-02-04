@@ -4,6 +4,8 @@ module.exports = app => {
 
     var router = require("express").Router();
 
+    router.use(authenticateToken);
+
     //routes for user 
     router.get("/",  authenticateToken, shop.getProducts);
     router.get("/:id",  authenticateToken, shop.getIdProduct);
@@ -11,6 +13,7 @@ module.exports = app => {
 
     //routes for admin
     router.get("/admin/products", isAdmin, shop.ManageProducts);
+    
     router.post("/admin/product/new", isAdmin, shop.CreateProduct);
     router.get("/admin/product/new", isAdmin, shop.AddProductForm);
 
@@ -21,9 +24,12 @@ module.exports = app => {
 
     
     router.get("/admin/categories", isAdmin, shop.ManageCategories);
+
     router.post("/admin/category/new",  isAdmin, shop.CreateCategory);
     router.get("/admin/category/new",  isAdmin, shop.CreateCategoryForm);
+
     router.post("/admin/category/edit/:id", isAdmin, shop.UpdateCategory);
     router.post("/admin/category/delete/:id", isAdmin, shop.DeleteCategory);
+
     app.use("/shop", router);
     };
