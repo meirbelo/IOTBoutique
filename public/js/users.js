@@ -36,4 +36,3 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
-alert("Hello from users.js");
